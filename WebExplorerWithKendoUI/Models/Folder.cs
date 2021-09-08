@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace WebExplorerWithKendoUI.Models
 {
     [Table("Folder")]
-    class Folder : Node
+    public class Folder : Node
     {
         public List<Node> Items { get; set; } = new List<Node>();
     }

@@ -8,22 +8,19 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace WebExplorerWithKendoUI.Models
 {
-    class WebExplorerContext : DbContext
+    public class WebExplorerContext : DbContext
     {
         public DbSet<File> Files { get; set; }
         public DbSet<Folder> Folders { get; set; }
         public DbSet<Node> Nodes { get; set; }
-        public DbSet<FileExtension> FileExtensions { get; set; }
-        public WebExplorerContext()
+       // public DbSet<FileExtension> FileExtensions { get; set; }
+        public WebExplorerContext(DbContextOptions<WebExplorerContext> options) : base(options)
         {
-            Database.EnsureDeleted();
+            //Database.EnsureDeleted();
             Database.EnsureCreated();
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseNpgsql(@"Host=localhost;Port=5432;Database=usersdb;Username=postgres;Password=328328");
-        }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

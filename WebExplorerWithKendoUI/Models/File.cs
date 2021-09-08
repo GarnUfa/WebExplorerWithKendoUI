@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 namespace WebExplorerWithKendoUI.Models
 {
     [Table("File")]
-    class File : Node
+    public class File : Node
     {
         [Required]
         public string Description { get; set; }
-        public byte[] Content { get; set; }
+        //public byte[] Content { get; set; }
     }
 }

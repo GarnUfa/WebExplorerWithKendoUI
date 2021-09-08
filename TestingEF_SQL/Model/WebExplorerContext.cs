@@ -14,10 +14,9 @@ namespace TestingEF_SQL.Model
         public DbSet<Node> Nodes { get; set; }
         public WebExplorerContext()
         {
-            //Database.EnsureDeleted();
+            Database.EnsureDeleted();
             Database.EnsureCreated();
         }
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseNpgsql(@"Host=localhost;Port=5432;Database=usersdb;Username=postgres;Password=328328");

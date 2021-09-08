@@ -12,15 +12,19 @@ namespace WebExplorerWithKendoUI.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        WebExplorerContext context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, WebExplorerContext context)
         {
             _logger = logger;
-        }
+            this.context = context;
+        }   
 
         public IActionResult Index()
         {
-            return View();
+            var all = context.Nodes.ToList();
+            var x = all.Where(c => c.ParentFolder?.ID == 1).ToList();
+            return View(x);
         }
 
         public IActionResult Privacy()

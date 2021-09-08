@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WebExplorerWithKendoUI.Models
 {
-    class Node
+    public class Node
     {
         public int ID { get; set; }
         [Required]

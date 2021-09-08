@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WebExplorerWithKendoUI.Models
 {
-    class FileExtension
+    public class FileExtension
     {
         public int ID { get; set; }
         public string FileType { get; set; }
