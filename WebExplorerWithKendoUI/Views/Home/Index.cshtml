@@ -15,56 +15,63 @@
             var x = JSON.parse('@Json.Serialize(Model)');
             console.log(x);
             
-            $(document).ready(function () {
-                var treeview = $("#treeview").kendoTreeView({
+            $(document).ready(function ()
+            {
+                var treeview = $("#treeview").kendoTreeView(
+                {
                     dataTextField: "name",
-                    dataSource: {
+                    dataSource:
+                    {
                         data: [{ name: "Root", items: x }]
                     },
                     loadOnDemand: false
 
                 }).data("kendoTreeView"),
 
-                handleTextBox = function(callback) {
-                    return function(e) {
-                        if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode) {
+                handleTextBox = function (callback)
+                {
+                    return function (e)
+                    {
+                        if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode)
+                        {
                             callback(e);
-
                         }
                     };
                 };
-             
 
-           
-            $("#removeNode").click(function() {
-                var selectedNode = treeview.select();
-                treeview.remove(selectedNode);
-            });
+                $("#removeNode").click(function ()
+                {
+                    var selectedNode = treeview.select();
+                    treeview.remove(selectedNode);
+                });
 
-            $("#expandAllNodes").click(function() {
-                treeview.expand(".k-item");
-            });
+                $("#expandAllNodes").click(function ()
+                {
+                    treeview.expand(".k-item");
+                });
 
 
-            var append = handleTextBox(function() {
-                var selectedNode = treeview.select();
-                    // passing a falsy value as the second append() parameter
-                    // will append the new node to the root group
-                if (selectedNode.length == 0) {
+                var append = handleTextBox(function ()
+                {
+                    var selectedNode = treeview.select();
+                        // passing a falsy value as the second append() parameter
+                        // will append the new node to the root group
+                    if (selectedNode.length == 0)
+                    {
                         selectedNode = null;
                     }
-
-                    treeview.append({
+                    treeview.append(
+                    {
                         name: $("#appendNodeText").val()
                     }, selectedNode);
                 });
 
-            $("#appendNodeToSelected").click(append);
-            $("#appendNodeText").keypress(append);
+                $("#appendNodeToSelected").click(append);
+                $("#appendNodeText").keypress(append);
 
-            // datasource actions
+                // datasource actions
 
-        });
+            });
         </script>
     </div>
 

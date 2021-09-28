@@ -27,6 +27,12 @@ namespace WebExplorerWithKendoUI.Controllers
             return View(x);
         }
 
+        public JsonResult AddItem()
+        {
+            var all = context.Nodes.ToList();
+            return Json(all);
+        }
+
         public IActionResult Privacy()
         {
             return View();
