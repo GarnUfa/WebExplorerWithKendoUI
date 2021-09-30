@@ -18,56 +18,67 @@
             $(document).ready(function ()
             {
                 var treeview = $("#treeview").kendoTreeView(
-                {
-                    dataTextField: "name",
-                    dataSource:
                     {
-                        data: [{ name: "Root", items: x }]
-                    },
-                    loadOnDemand: false
+                        dataTextField: "name",
+                        dataSource: x,
+                        loadOnDemand: false
 
-                }).data("kendoTreeView"),
-
-                handleTextBox = function (callback)
-                {
-                    return function (e)
+                    }).data("kendoTreeView");
+                var rootSelect = treeview.findByText("Root");
+                treeview.select(rootSelect);
+                var handleTextBox = function (callback)
                     {
-                        if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode)
+                        return function (e)
                         {
-                            callback(e);
-                        }
-                    };
+                            if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode)
+                            {
+                                callback(e);
+                            }
+                        };
                 };
-
+                
                 $("#removeNode").click(function ()
-                {
-                    var selectedNode = treeview.select();
-                    treeview.remove(selectedNode);
-                });
+                    {
+                        var selectedNode = treeview.select();
+                        treeview.remove(selectedNode);
+                    });
 
                 $("#expandAllNodes").click(function ()
-                {
-                    treeview.expand(".k-item");
-                });
+                    {
+                        treeview.expand(".k-item");
+                    });
 
 
                 var append = handleTextBox(function ()
-                {
+                    {
                     var selectedNode = treeview.select();
-                        // passing a falsy value as the second append() parameter
-                        // will append the new node to the root group
-                    if (selectedNode.length == 0)
-                    {
-                        selectedNode = null;
-                    }
-                    treeview.append(
-                    {
-                        name: $("#appendNodeText").val()
-                    }, selectedNode);
-                });
+                    console.log((treeview.dataItem(selectedNode)).id);
+                    var id = (treeview.dataItem(selectedNode).id);
+                    console.log(id);
+                    console.log(typeof (id));
+                            // passing a falsy value as the second append() parameter
+                            // will append the new node to the root group
+                        if (selectedNode.length == 0)
+                        {
+                            selectedNode = null;
+                        }
+
+                    $.ajax({
+                        type: "POST",
+                        url: "Home/AddFolder",
+                        dataType: "json",
+                        data: { id: id, name: $("#appendNodeText").val()},
+                        success: function (data) {
+                            treeview.append(
+                                {
+                                    name: $("#appendNodeText").val()
+                                }, selectedNode);
+                        }
+                    })
+                    });
 
                 $("#appendNodeToSelected").click(append);
-                $("#appendNodeText").keypress(append);
+                
 
                 // datasource actions
 

@@ -24,12 +24,19 @@ namespace WebExplorerWithKendoUI.Controllers
         {
             var all = context.Nodes.ToList();
             var x = all.Where(c => c.ParentFolder?.ID == 1).ToList();
-            return View(x);
+            return View(all);
         }
 
-        public JsonResult AddItem()
+        [HttpPost]
+        public JsonResult AddFolder(int id, string name)
         {
+            int parentID = id;
+            string folderName = name;
             var all = context.Nodes.ToList();
+            Folder parrentFold = (Folder)(all.Where(f => f.ID == id).First());
+            Folder folder = new Folder() {Name = name, ParentFolder = parrentFold };
+            context.Folders.Add(folder);
+            context.SaveChanges();
             return Json(all);
         }
 
