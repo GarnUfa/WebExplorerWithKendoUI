@@ -27,7 +27,7 @@ namespace WebExplorerWithKendoUI
         {
             string connection = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<WebExplorerContext>(options =>
-                options.UseNpgsql(connection));
+                options.UseNpgsql(connection), ServiceLifetime.Singleton);
             services.AddControllersWithViews().AddNewtonsoftJson(options=>options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
         }
 

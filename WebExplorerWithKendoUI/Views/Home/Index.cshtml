@@ -52,9 +52,7 @@
                 var append = handleTextBox(function ()
                     {
                     var selectedNode = treeview.select();
-                    console.log((treeview.dataItem(selectedNode)).id);
                     var id = (treeview.dataItem(selectedNode).id);
-                    console.log(id);
                     console.log(typeof (id));
                             // passing a falsy value as the second append() parameter
                             // will append the new node to the root group
@@ -69,10 +67,10 @@
                         dataType: "json",
                         data: { id: id, name: $("#appendNodeText").val()},
                         success: function (data) {
-                            treeview.append(
-                                {
-                                    name: $("#appendNodeText").val()
-                                }, selectedNode);
+                            console.log(data);
+                            treeview.setDataSource(new kendo.data.HierarchicalDataSource({
+                                data: data
+                            }))
                         }
                     })
                     });
@@ -80,7 +78,7 @@
                 $("#appendNodeToSelected").click(append);
                 
 
-                // datasource actions
+                //// datasource actions
 
             });
         </script>
