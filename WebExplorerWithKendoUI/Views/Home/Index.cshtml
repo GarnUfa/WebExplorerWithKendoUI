@@ -52,15 +52,19 @@
                 var append = handleTextBox(function ()
                     {
                     var selectedNode = treeview.select();
-                    var id = (treeview.dataItem(selectedNode).id);
                     console.log(typeof (id));
+                    var id;
                             // passing a falsy value as the second append() parameter
                             // will append the new node to the root group
-                        if (selectedNode.length == 0)
-                        {
-                            selectedNode = null;
-                        }
-
+                    if (selectedNode.length == 0) {
+                        selectedNode = null;
+                        id = 1;
+                    }
+                    else {
+                        id = (treeview.dataItem(selectedNode).id)
+                    }
+                    
+                    console.log(id);
                     $.ajax({
                         type: "POST",
                         url: "Home/AddFolder",
@@ -71,12 +75,18 @@
                             treeview.setDataSource(new kendo.data.HierarchicalDataSource({
                                 data: data
                             }))
+                            treeview.expand(".k-item");
                         }
                     })
                     });
 
                 $("#appendNodeToSelected").click(append);
-                
+                $(document).on("click", function (e) {
+                    if (e.target === document || e.target.tagName === "BODY" || e.target.tagName === "HTML") {
+                        // Clicked on blank space
+                        treeview.select($());
+                    }
+                });
 
                 //// datasource actions
 

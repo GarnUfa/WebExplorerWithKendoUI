@@ -16,7 +16,7 @@ namespace WebExplorerWithKendoUI.Models
        // public DbSet<FileExtension> FileExtensions { get; set; }
         public WebExplorerContext(DbContextOptions<WebExplorerContext> options) : base(options)
         {
-            //Database.EnsureDeleted();
+            Database.EnsureDeleted();
             Database.EnsureCreated();
         }
 

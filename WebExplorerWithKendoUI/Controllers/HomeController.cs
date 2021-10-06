@@ -38,7 +38,8 @@ namespace WebExplorerWithKendoUI.Controllers
             Folder folder = new Folder() {Name = name, ParentFolder = parrentFold };
             context.Folders.Add(folder);
             context.SaveChanges();
-            var all = context.Nodes.ToList();
+            var all = context.Nodes.ToList()
+                .Where(c => c.ParentFolder?.ID == 1).ToList();
             return Json(all);
         }
 
