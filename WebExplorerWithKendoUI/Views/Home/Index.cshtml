@@ -14,13 +14,18 @@
         <script>
             var x = JSON.parse('@Json.Serialize(Model)');
             console.log(x);
-            
+            var dataSource = new kendo.data.HierarchicalDataSource({
+                transport: {
+                    read: {
+                        url: "Home/LoadResult",
+                        dataType: "json"
+                    }
+                }
+            });
             $(document).ready(function () {
                 var treeview = $("#treeview").kendoTreeView({
                     dataTextField: "name",
-                    dataSource: {
-                        data: [{ name: "Root", items: x }]
-                    },
+                    dataSource: dataSource,
                     loadOnDemand: false
 
                 }).data("kendoTreeView"),
