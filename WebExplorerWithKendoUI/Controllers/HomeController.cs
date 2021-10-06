@@ -31,7 +31,7 @@ namespace WebExplorerWithKendoUI.Controllers
         {
             var all = context.Nodes.ToList();
             var x = all.Where(c => c.ParentFolder?.ID == 1).ToList();
-            return Json(all);
+            return Json(x);
         }
 
         public IActionResult Privacy()
