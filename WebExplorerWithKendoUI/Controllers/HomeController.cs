@@ -29,9 +29,9 @@ namespace WebExplorerWithKendoUI.Controllers
         [HttpGet]
         public JsonResult LoadResult()
         {
-            var all = context.Nodes.ToList();
-            var x = all.Where(c => c.ParentFolder?.ID == 1).ToList();
-            return Json(x);
+            var allNodes = context.Nodes.ToList();
+            var nodesInRoot = allNodes.Where(c => c.ParentFolder?.ID == 1).ToList();
+            return Json(nodesInRoot);
         }
 
         public IActionResult Privacy()
